@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal } from '../../../../../projects/truly-ui/src/components/modal/modal-options';
+import { Modal } from '../../../../../projects/truly-ui/src/components/modal/interfaces/modal-options';
 
 @Modal({
   title: 'New Modal',

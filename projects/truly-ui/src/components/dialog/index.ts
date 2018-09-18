@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { DialogService } from './dialog.service';
 import { IdGeneratorService } from '../core/helper/idgenerator.service';
 import { NameGeneratorService } from '../core/helper/namegenerator.service';
-import { TabIndexService } from '../form/tabIndex.service';
+import { TabIndexService } from '../form/services/tabIndex.service';
 
 import { TlDialogAlert } from './dialog-alert/dialog-alert';
 import { TlDialogConfirmation } from './dialog-confirmation/dialog-confirmation';

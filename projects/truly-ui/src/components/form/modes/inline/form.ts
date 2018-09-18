@@ -25,23 +25,23 @@ import {
   ViewChild,
   forwardRef, OnDestroy, OnInit, AfterViewInit, AfterContentInit, EventEmitter, ContentChild, Injector,
 } from '@angular/core';
-import { KeyEvent } from '../core/enums/key-events';
-import { I18nService } from '../i18n/i18n.service';
-import { TlInput } from '../input/input';
+import { KeyEvent } from '../../../core/enums/key-events';
+import { I18nService } from '../../../i18n/i18n.service';
+import { TlInput } from '../../../input/input';
 import { FormGroup, NgForm, NgModel } from '@angular/forms';
-import { TlButton } from '../button/button';
-import { FormSubmitDirective } from './form-submit.directive';
-import { ModalService } from '../modal/modal.service';
-import { ActionsModal } from '../core/enums/actions-modal';
+import { TlButton } from '../../../button/button';
+import { ActionsModal } from '../../../core/enums/actions-modal';
+import { SubmitButtonDirective } from '../../directives/submit-button.directive';
+import { Subscription } from 'rxjs';
 
 let componentFormIndex;
 
 @Component( {
-  selector: 'tl-form',
-  templateUrl: '../form/form.html',
-  styleUrls: [ '../form/form.scss' ]
+  selector: 'tl-inline-form',
+  templateUrl: './form.html',
+  styleUrls: [ './form.scss' ]
 } )
-export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
+export class TlInlineForm implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
 
   @Input() initialFocus: TlInput;
 
@@ -56,8 +56,6 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
   @Input() submitShortcut = '';
 
   @Input() cancelShortcut = 'escape';
-
-  @Input() mode: 'inline' | 'modal' = 'modal';
 
   @Input() textConfirm = this.i18n.getLocale().Form.textOk;
 
@@ -79,11 +77,9 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
 
   @ContentChildren( forwardRef( () => NgModel ), { descendants: true } ) models: QueryList<NgModel>;
 
-  @ContentChild( FormSubmitDirective ) submitDirective;
+  @ContentChild( SubmitButtonDirective ) submitDirective;
 
-  @ViewChild( 'buttonFormOk' ) buttonFormOk;
-
-  @ViewChild( 'buttonFormCancel' ) buttonFormCancel;
+  @ContentChild( TlButton ) public button;
 
   @ViewChild( 'content' ) content;
 
@@ -97,13 +93,9 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
 
   private elementsWithTabIndex = [];
 
-  private listeners = [];
+  private subscription = new Subscription();
 
-  private modalInstance;
-
-  constructor( private renderer: Renderer2, private i18n: I18nService, private injector: Injector ) {
-    this.modalInstance = this.injector.get(ModalService);
-  }
+  constructor( private renderer: Renderer2, private i18n: I18nService ) {}
 
   get valid() {
     return this.form.valid;
@@ -111,36 +103,26 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
 
   ngOnInit() {
     componentFormIndex = -1;
+    this.listenSubmit();
   }
 
   ngAfterContentInit() {
-    this.handleFormGroupValues();
-    this.handleSmartFormAction();
     this.setPrimaryKeyDisabled();
     this.addControls();
   }
 
-  handleSmartFormAction() {
-    if (this.modalInstance.modalConfiguration) {
-      this.actionForm.emit( this.modalInstance.modalConfiguration.executeAction );
-    }
+  listenSubmit() {
+    this.subscription.add(
+      this.submitDirective.submitEmitter.subscribe(() => {
+        this.getFormValues();
+      })
+    );
   }
 
   ngAfterViewInit() {
     this.setInitialFocus();
     this.getElementsOfForm();
-    this.clickListener();
     this.formLoaded.emit( this.formGroup ? this.formGroup : this.form.form );
-  }
-
-  handleFormGroupValues() {
-    if (this.formGroup) {
-      if (this.modalInstance.modalConfiguration &&
-        this.modalInstance.modalConfiguration.executeAction !== ActionsModal.INSERT &&
-        this.modalInstance.modalConfiguration.dataForm) {
-        this.formGroup.patchValue( this.modalInstance.modalConfiguration.dataForm );
-      }
-    }
   }
 
   setPrimaryKeyDisabled() {
@@ -151,62 +133,13 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
 
   addControls() {
     if ( !this.formGroup ) {
-      this.models.toArray().forEach( ( item, index, array ) => {
+      this.models.toArray().forEach( ( item ) => {
         this.form.addControl( item );
       } );
     }
   }
 
-  clickListener() {
-    if ( this.mode === 'modal' ) {
-      this.listenMouseDownButtonForm();
-      this.listenKeyDownButtonForm();
-    } else {
-      this.listenKeyDownSubmitButton();
-      this.listenMouseDownSubmitButton();
-    }
-  }
-
-  listenKeyDownButtonForm() {
-    this.renderer.listen( this.buttonFormOk.buttonElement.nativeElement, 'keydown.enter', $event => {
-      $event.stopPropagation();
-      this.onClickButtonOk();
-    } );
-  }
-
-  listenMouseDownButtonForm() {
-    this.renderer.listen( this.buttonFormOk.buttonElement.nativeElement, 'mousedown', $event => {
-      $event.stopPropagation();
-      this.onClickButtonOk();
-    } );
-  }
-
-  listenKeyDownSubmitButton() {
-    if ( this.submitDirective ) {
-      this.renderer.listen( this.submitDirective.button.buttonElement.nativeElement, 'keydown', $event => {
-        $event.stopPropagation();
-        this.onClickButtonOk();
-      } );
-    }
-  }
-
-  listenMouseDownSubmitButton() {
-    if ( this.submitDirective ) {
-      this.renderer.listen( this.submitDirective.button.buttonElement.nativeElement, 'mousedown', $event => {
-        $event.stopPropagation();
-        this.onClickButtonOk();
-      } );
-    }
-  }
-
-  onClickButtonOk() {
-    this.getFormValues();
-  }
-
   getFormValues() {
-    if (this.primaryKey && this.modalInstance.modalConfiguration.executeAction === ActionsModal.UPDATE) {
-      this.formGroup.get(this.primaryKey).enable();
-    }
     this.formResult = this.formGroup ? this.formGroup : this.form;
     this.submitForm.emit( this.formGroup ? this.formGroup.value : this.form.value );
   }
@@ -233,18 +166,7 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
   }
 
   addButtonsOfFormToListElements() {
-    if ( this.mode === 'inline' ) {
-      this.buttonList.forEach( ( item, index, array ) => {
-        index === 0 ? this.buttonFormOk = item : this.buttonFormCancel = item;
-      } );
-    }
-
-    if ( this.buttonFormOk ) {
-      this.focusElements.push( this.buttonFormOk.buttonElement.nativeElement );
-    }
-    if ( this.buttonFormCancel ) {
-      this.focusElements.push( this.buttonFormCancel.buttonElement.nativeElement );
-    }
+    this.focusElements.push( this.button.buttonElement.nativeElement );
   }
 
   handleTabIndexComponentsOfForm() {
@@ -335,12 +257,6 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
         $event.preventDefault();
         this.forwardTabbing();
         break;
-      case KeyEvent.ARROWRIGHT :
-        this.setFocusOK();
-        break;
-      case KeyEvent.ARROWLEFT:
-        this.setFocusCancel();
-        break;
       case KeyEvent.TAB:
         $event.preventDefault();
         this.forwardTabbing();
@@ -405,18 +321,6 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
     } );
   }
 
-  setFocusOK() {
-    if ( this.isActiveElementButtonCancel() ) {
-      this.buttonFormOk.buttonElement.nativeElement.focus();
-    }
-  }
-
-  setFocusCancel() {
-    if ( this.isActiveElementButtonOk() ) {
-      this.buttonFormCancel.buttonElement.nativeElement.focus();
-    }
-  }
-
   setFocusOnFirstInput() {
     let element;
     for ( const item in this.inputList.toArray() ) {
@@ -430,22 +334,8 @@ export class TlForm implements OnInit, AfterViewInit, AfterContentInit, OnDestro
     }
   }
 
-  isActiveElementButtonOk() {
-    return document.activeElement === this.buttonFormOk.buttonElement.nativeElement;
-  }
-
-  isActiveElementButtonCancel() {
-    return document.activeElement === this.buttonFormCancel.buttonElement.nativeElement;
-  }
-
-  destroyListeners() {
-    this.listeners.forEach( ( value ) => {
-      value();
-    } );
-  }
-
   ngOnDestroy() {
-    this.destroyListeners();
+    this.subscription.unsubscribe();
   }
 
 

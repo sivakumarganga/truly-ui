@@ -22,17 +22,18 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ModalService } from './modal.service';
 import { TlModal } from './modal';
 import { ToneColorGenerator } from '../core/helper/tonecolor-generator';
 import { TlBackdrop } from '../core/components/backdrop/backdrop';
 import { LimitStringPipe } from '../core/helper/limitstring.pipe';
 import { ShortcutService } from '../core/helper/shortcut.service';
-import { SidebarService } from './sidebar.service';
+import { SidebarService } from './services/sidebar.service';
 
 import { BackdropModule } from '../core/components/backdrop/index';
 import { MiscModule } from '../misc/index';
-import { ModalResultDirective } from './directives/modal-result.directive';
+import { ModalManagerService } from './services/modal-manager.service';
+import { ModalStateService } from './services/modal-state.service';
+import { DialogManagerService } from './services/dialog-manager.service';
 
 @NgModule( {
     imports: [
@@ -42,12 +43,10 @@ import { ModalResultDirective } from './directives/modal-result.directive';
     ],
     declarations: [
       TlModal,
-      ModalResultDirective,
       LimitStringPipe,
     ],
     exports: [
       TlModal,
-      ModalResultDirective,
       LimitStringPipe
     ],
     entryComponents: [
@@ -61,7 +60,9 @@ export class ModalModule {
       ngModule: ModalModule,
       providers: [
         ToneColorGenerator,
-        ModalService,
+        ModalManagerService,
+        DialogManagerService,
+        ModalStateService,
         ShortcutService,
         SidebarService
       ],

@@ -1,7 +1,9 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { ModalService } from '../../../../../projects/truly-ui/src/components/modal/modal.service';
 import * as json from './modal-options-table';
 import { FormModalComponent } from './form-modal/form-modal.component';
+import { FormModalService } from '../../../../../projects/truly-ui/src/components/form/modes/modal/form-modal.service';
+
+let counter = 0;
 
 @Component({
   selector: 'app-form-modaldemo',
@@ -14,14 +16,14 @@ export class FormModaldemoComponent implements OnInit {
 
   public dataModalOptions;
 
-  constructor( private factory: ComponentFactoryResolver, private modalService: ModalService ) { }
+  constructor( private factory: ComponentFactoryResolver, private formModalService: FormModalService ) { }
 
   ngOnInit() {
     this.dataModalOptions = json.ModalOptions;
   }
 
   openModalForm() {
-    this.modalService.createModal(FormModalComponent, this.factory).then((result) => {
+    this.formModalService.create(FormModalComponent, this.factory, 'FORM_TESTE-' + counter++ ).then((result) => {
       console.log('Result', result);
     });
   }

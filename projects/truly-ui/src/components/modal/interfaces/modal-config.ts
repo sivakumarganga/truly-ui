@@ -19,8 +19,8 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
-import { ActionsModal } from '../core/enums/actions-modal';
-import { LOCALE_I18N } from '../i18n/i18n.service';
+import { ActionsModal } from '../../core/enums/actions-modal';
+import { LOCALE_I18N } from '../../i18n/i18n.service';
 import { ComponentFactoryResolver, ElementRef } from '@angular/core';
 
 export interface ModalConfig {
@@ -48,6 +48,7 @@ export class ModalConfiguration implements ModalConfig {
   deleteConfirmationMessage?;
   recordNotFoundMessage?;
   parentElement?;
+  actions?;
 
   constructor() {
     this.factory = null;

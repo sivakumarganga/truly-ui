@@ -23,7 +23,7 @@
 import { Input, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ComponentDefaultBase } from './component-default.base';
 import { ControlValueAccessor } from '@angular/forms/src/forms';
-import { TabIndexService } from '../../form/tabIndex.service';
+import { TabIndexService } from '../../form/services/tabIndex.service';
 import { IdGeneratorService } from '../helper/idgenerator.service';
 import { NameGeneratorService } from '../helper/namegenerator.service';
 import { Validations } from '../validations/validations';

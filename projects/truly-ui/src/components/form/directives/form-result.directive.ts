@@ -20,17 +20,16 @@
  SOFTWARE.
  */
 import {
-  Input, OnInit, Directive, HostListener, ContentChild, ComponentRef, ElementRef
+  Input, OnInit, Directive, HostListener, ContentChild, ComponentRef, ElementRef, EventEmitter
 } from '@angular/core';
 import { ModalResult } from '../../core/enums/modal-result';
-import { ModalService } from '../modal.service';
 import { TlButton } from '../../button/button';
-import { TlModal } from '../modal';
+import { ModalManagerService } from '../../modal/services/modal-manager.service';
 
 @Directive( {
   selector: '[mdResult]'
 } )
-export class ModalResultDirective implements OnInit {
+export class FormResultDirective implements OnInit {
 
   @Input( 'mdResult' ) mdResult: ModalResult;
 
@@ -38,37 +37,34 @@ export class ModalResultDirective implements OnInit {
 
   @ContentChild( TlButton ) button;
 
-  private modalInstance: ComponentRef<TlModal>;
+  public eventEmitter: EventEmitter<any> = new EventEmitter();
 
-  @HostListener( 'click' )
-  onClick() {
-    if (!this.button.disabled) {
-      this.dispatchCallback();
-    }
+  private identifier;
+
+  @HostListener( 'click', ['$event'] )
+  onClick($event) {
+    this.eventEmitter.emit($event);
   }
 
-  @HostListener( 'keydown.enter' )
-  onKeyDown() {
-    if (!this.button.disabled) {
-      this.dispatchCallback();
-    }
+  @HostListener( 'keydown.enter', ['$event'] )
+  onKeyDown($event) {
+    this.eventEmitter.emit($event);
   }
 
-  constructor( private modalService: ModalService ) {
-  }
+  constructor(  ) {}
 
   ngOnInit() {
-    this.modalInstance = this.modalService.getParentModalInjectedView();
+    //  this.modalInstance = this.modalService.getParentModalInjectedView();
   }
 
-  dispatchCallback(): Promise<any> {
+/*  dispatchCallback(): Promise<any> {
     return new Promise( ( resolve ) => {
       if ( !this.mdResult || ModalResult.MRCUSTOM ) {
         return;
       }
-      this.modalService.execCallBack( this.getResult(), this.modalInstance );
+      // this.modalService.execCallBack( this.getResult(), this.modalInstance );
     } );
-  }
+  }*/
 
   getResult() {
     if ( this.formResult ) {

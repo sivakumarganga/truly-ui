@@ -42,7 +42,7 @@ export { TimePickerModule } from './components/timepicker/index';
 export { ValidatorsModule } from './components/validators/index';
 
 // Interfaces
-export { ModalOptions, Modal } from './components/modal/modal-options';
+export { ModalOptions, Modal } from './components/modal/interfaces/modal-options';
 
 // Enumerators
 export { ActionsModal } from './components/core/enums/actions-modal';
@@ -51,7 +51,7 @@ export { ModalResult } from './components/core/enums/modal-result';
 
 // Services
 export { DialogService } from './components/dialog/dialog.service';
-export { ModalService } from './components/modal/modal.service';
+export { ModalManagerService } from './components/modal/services/modal.service';
 export { NavigatorService } from './components/navigator/services/navigator.service';
 export { ToasterService } from './components/toaster/services/toaster.service';
 

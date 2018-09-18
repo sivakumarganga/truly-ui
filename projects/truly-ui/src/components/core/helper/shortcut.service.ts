@@ -22,8 +22,8 @@
 
 import { Injectable, OnDestroy, Renderer2 } from '@angular/core';
 import { TlButton } from '../../button/button';
-import { ModalService } from '../../modal/modal.service';
 import { Subscription } from 'rxjs';
+import { ModalManagerService } from '../../modal/services/modal-manager.service';
 
 let listener;
 
@@ -46,7 +46,7 @@ export class ShortcutService implements OnDestroy {
 
   private headElement = {};
 
-  constructor( private modalService: ModalService ) {}
+  constructor( private modalService: ModalManagerService ) {}
 
   setRenderer( renderer ) {
     this.renderer = renderer;

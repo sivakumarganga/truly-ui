@@ -24,7 +24,7 @@ import {
   EventEmitter, Input, QueryList, ViewChildren, ViewContainerRef, SimpleChanges, OnChanges,
 } from '@angular/core';
 
-import { TabIndexService } from '../form/tabIndex.service';
+import { TabIndexService } from '../form/services/tabIndex.service';
 import { IdGeneratorService } from '../core/helper/idgenerator.service';
 import { NameGeneratorService } from '../core/helper/namegenerator.service';
 import { ComponentDefaultBase } from '../core/base/component-default.base';

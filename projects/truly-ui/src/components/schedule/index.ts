@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TabIndexService } from '../form/tabIndex.service';
+import { TabIndexService } from '../form/services/tabIndex.service';
 import { IdGeneratorService } from '../core/helper/idgenerator.service';
 import { NameGeneratorService } from '../core/helper/namegenerator.service';
 import { HeadingComponent } from './parts/heading/heading.component';

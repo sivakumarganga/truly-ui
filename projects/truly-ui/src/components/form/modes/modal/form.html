@@ -4,9 +4,9 @@
         <ng-content></ng-content>
       </form>
     </div>
-    <div [ngClass]="{'clearfix': mode !== 'inline'}"></div>
-    <div [ngClass]="{'forFooter': mode !== 'inline'}">
-        <div class="controls" *ngIf="mode !== 'inline'">
+    <div class="clearfix"></div>
+    <div class="forFooter">
+        <div class="controls">
           <tl-button  #buttonFormCancel
                        [text]="textCancel"
                        mdResult="MRCANCEL"

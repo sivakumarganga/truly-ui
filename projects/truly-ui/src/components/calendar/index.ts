@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TlCalendar } from './calendar';
-import { TabIndexService } from '../form/tabIndex.service';
+import { TabIndexService } from '../form/services/tabIndex.service';
 import { IdGeneratorService } from '../core/helper/idgenerator.service';
 import { NameGeneratorService } from '../core/helper/namegenerator.service';
 import { TlCalendarDays } from './parts/calendar-days';

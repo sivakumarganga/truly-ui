@@ -23,7 +23,7 @@ import { AfterViewInit, Component, HostBinding, OnInit, ViewChild } from '@angul
 import { animate, style, transition, trigger } from '@angular/animations';
 import { I18nService } from '../../i18n/i18n.service';
 import { DialogDefaultBehavior } from '../dialog-default-behavior';
-import { Modal } from '../../modal/modal-options';
+import { Modal } from '../../modal/interfaces/modal-options';
 import { TlButton } from '../../button/button';
 @Modal({
   icon: 'ion-close-circled',

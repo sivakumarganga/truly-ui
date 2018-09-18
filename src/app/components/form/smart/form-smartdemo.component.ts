@@ -1,8 +1,9 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { ActionsModal } from '../../../../../projects/truly-ui/src/components/core/enums/actions-modal';
-import { ModalService } from '../../../../../projects/truly-ui/src/components/modal/modal.service';
 import * as json from './modal-config-table';
 import { SmartFormModalComponent } from './smart-modal/smart-modal.component';
+import { SmartFormService } from '../../../../../projects/truly-ui/src/components/form/modes/smart/smart-form.service';
+
+let counter = 0;
 
 @Component({
   selector: 'app-form-smartdemo',
@@ -15,17 +16,17 @@ export class FormSmartdemoComponent implements OnInit {
 
   public modalConfig;
 
-  constructor(private factory: ComponentFactoryResolver, private modalService: ModalService ) { }
+  constructor(private factory: ComponentFactoryResolver, private smartFormService: SmartFormService ) { }
 
   ngOnInit() {
     this.modalConfig = json.ModalConfig;
   }
 
   openModal( action ) {
-    this.modalService.createModal( SmartFormModalComponent, {
+    this.smartFormService.create( SmartFormModalComponent, {
       factory: this.factory,
       executeAction: action,
-      identifier: 'FORM_SMART_1',
+      identifier: 'FORM_TESTE-' + counter++,
       dataForm: {
         nickname: 'willz',
         id: 'b42f0653-b0a3-4482-b2e3-3d971ddaeb3f',

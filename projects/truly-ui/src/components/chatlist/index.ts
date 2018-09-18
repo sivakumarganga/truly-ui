@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TlChatList } from './chatlist';
-import { TabIndexService } from '../form/tabIndex.service';
+import { TabIndexService } from '../form/services/tabIndex.service';
 import { IdGeneratorService } from '../core/helper/idgenerator.service';
 import { NameGeneratorService } from '../core/helper/namegenerator.service';
 import { ChatListService } from './chatlist.service';

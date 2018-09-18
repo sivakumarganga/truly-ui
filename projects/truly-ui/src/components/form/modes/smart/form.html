@@ -1,0 +1,31 @@
+<div class="formBox" (keydown)="handleKeysForm($event)">
+    <div class="formContent" #content [style.padding]="padding">
+      <form novalidate #form="ngForm">
+        <ng-content></ng-content>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div class="forFooter">
+        <div class="controls">
+          <tl-button  #buttonFormCancel
+                       [text]="textCancel"
+                       mdResult="MRCANCEL"
+                       [color]="'basic'"
+                       [style.padding-right]="'5px'"
+                       [shortcut]="cancelShortcut"
+                       [formResult]="formResult"
+                       [iconAddonBefore]="'ion-close-circled'">
+            </tl-button>
+            <tl-button #buttonFormOk
+                       [text]="textConfirm"
+                       [isLoading]="isLoading"
+                       mdResult="MROK"
+                       [color]="'success'"
+                       [shortcut]="submitShortcut"
+                       [disabled]="isLoading ? true : formGroup ? !formGroup.valid : !form.valid"
+                       [formResult]="formResult"
+                       [iconAddonBefore]="'ion-checkmark'">
+            </tl-button>
+        </div>
+    </div>
+</div>

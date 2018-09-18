@@ -22,7 +22,7 @@
  SOFTWARE.
  */
  import { AfterContentInit, ContentChild, Directive } from '@angular/core';
- import { TlButton } from '../button/button';
+ import { TlButton } from '../../button/button';
 
 @Directive({
   selector: '[formSubmit]'

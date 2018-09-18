@@ -22,7 +22,7 @@
 import { ElementRef, Input } from '@angular/core';
 import { IdGeneratorService } from '../helper/idgenerator.service';
 import { NameGeneratorService } from '../helper/namegenerator.service';
-import { TabIndexService } from '../../form/tabIndex.service';
+import { TabIndexService } from '../../form/services/tabIndex.service';
 
 /**
  * Class extended of others components, in charge of generate ID and TabIndex.

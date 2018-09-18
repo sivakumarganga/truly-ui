@@ -12,43 +12,43 @@
       <div class="col-md-12">
         <app-showcase-card [title]="'Showcase'" [icon]="'ion-monitor'">
           <app-card>
-            <tl-form #form (submitForm)="onSubmitForm($event)"
-                     [mode]="'inline'"
-                     [textConfirm]="'Login'"
-                     [showConfirmOnChange]="true"
-                     [messageDialogConfirmation]="'Are you sure ?'">
-              <tl-tabcontrol>
-                <tl-tab [title]="'Login'">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <tl-input [name]="'name'" minlength="3" [showValidations]="true" required [labelSize]="100"
-                                  [ngModel]="person?.name" [label]="'User'"></tl-input>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <tl-input name="password" password [showValidations]="true" required [labelSize]="100"
-                                  [ngModel]="person?.password" [label]="'Password'"></tl-input>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-2 pull-right">
-                      <div class="form-group">
-                        <tl-checkbox name="remember"
-                                     [ngModel]="person?.remember" [label]="'Remember Password'"></tl-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </tl-tab>
-                <div class="spacer"></div>
-                <tl-button class="pull-right" [color]="'success'" formSubmit [disabled]="!form.valid"
-                           [text]="'Login'"></tl-button>
-              </tl-tabcontrol>
-            </tl-form>
+            <!--<tl-form #form (submitForm)="onSubmitForm($event)"-->
+                     <!--[mode]="'inline'"-->
+                     <!--[textConfirm]="'Login'"-->
+                     <!--[showConfirmOnChange]="true"-->
+                     <!--[messageDialogConfirmation]="'Are you sure ?'">-->
+              <!--<tl-tabcontrol>-->
+                <!--<tl-tab [title]="'Login'">-->
+                  <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                      <!--<div class="form-group">-->
+                        <!--<tl-input [name]="'name'" minlength="3" [showValidations]="true" required [labelSize]="100"-->
+                                  <!--[ngModel]="person?.name" [label]="'User'"></tl-input>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                      <!--<div class="form-group">-->
+                        <!--<tl-input name="password" password [showValidations]="true" required [labelSize]="100"-->
+                                  <!--[ngModel]="person?.password" [label]="'Password'"></tl-input>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="row">-->
+                    <!--<div class="col-md-2 pull-right">-->
+                      <!--<div class="form-group">-->
+                        <!--<tl-checkbox name="remember"-->
+                                     <!--[ngModel]="person?.remember" [label]="'Remember Password'"></tl-checkbox>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</tl-tab>-->
+                <!--<div class="spacer"></div>-->
+                <!--<tl-button class="pull-right" [color]="'success'" formSubmit [disabled]="!form.valid"-->
+                           <!--[text]="'Login'"></tl-button>-->
+              <!--</tl-tabcontrol>-->
+            <!--</tl-form>-->
             <div highlight="all" *ngIf="formInline">
               <pre><code [textContent]="formInline | json"></code></pre>
             </div>

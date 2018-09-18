@@ -30,6 +30,7 @@ import { DialogModule } from '../../../../../projects/truly-ui/src/components/di
 import { AutoCompleteModule } from '../../../../../projects/truly-ui/src/components/autocomplete/index';
 import { MultiViewModule } from '../../../../../projects/truly-ui/src/components/multiview/index';
 import { FormModalComponent } from './form-modal/form-modal.component';
+import { FormModalService } from '../../../../../projects/truly-ui/src/components/form/modes/modal/form-modal.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { FormModalComponent } from './form-modal/form-modal.component';
   ],
   providers: [
     DumpDataService,
+    FormModalService
   ],
   entryComponents: [ FormModalComponent ]
 })

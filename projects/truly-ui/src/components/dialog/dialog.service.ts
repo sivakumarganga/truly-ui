@@ -20,7 +20,6 @@
  SOFTWARE.
  */
 import { Injectable, ComponentFactoryResolver } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
 
 import { TlDialogInfo } from './dialog-info/dialog-info';
 import { TlDialogAlert } from './dialog-alert/dialog-alert';
@@ -31,53 +30,36 @@ import { ConfirmationOptions } from './dialog-confirmation/confirmation-options'
 import { ErrorOptions } from './dialog-error/error-options';
 import { AlertOptions } from './dialog-alert/alert-options';
 import { InfoOptions } from './dialog-info/info-options';
-import { TlBackdrop } from '../core/components/backdrop/backdrop';
+import { DialogManagerService } from '../modal/services/dialog-manager.service';
 
 @Injectable()
 export class DialogService {
 
-    constructor( private modalService: ModalService, private factoryResolver: ComponentFactoryResolver ) {}
+    constructor( private dialogManager: DialogManagerService, private factoryResolver: ComponentFactoryResolver ) {}
 
-    info( message: string, callback?: Function, options?: InfoOptions ) {
-        this.modalService.createModalDialog( TlDialogInfo, this.factoryResolver,  callback );
-        this.modalService.componentInjected.instance.message = message;
-        this.setDialogOptions( options );
+    info( message: string, options?: InfoOptions ) {
+        return this.dialogManager.create( TlDialogInfo, this.factoryResolver, message, options );
     }
 
     confirmation( message: string, callback: Function, options?: ConfirmationOptions) {
-        this.modalService.createModalDialog( TlDialogConfirmation, this.factoryResolver, callback );
-        if (options) {
-            this.modalService.componentInjected.instance.defaultOK = options.defaultOK;
-        }
-        this.modalService.componentInjected.instance.message = message;
-        this.setDialogOptions( options );
+        // this.modalService.createModalDialog( TlDialogConfirmation, this.factoryResolver, callback );
+        // if (options) {
+        //     this.modalService.componentInjected.instance.defaultOK = options.defaultOK;
+        // }
+        // this.modalService.componentInjected.instance.message = message;
+        // this.setDialogOptions( options );
     }
 
     alert( message: string, callback: Function, options?: AlertOptions ) {
-        this.modalService.createModalDialog( TlDialogAlert, this.factoryResolver, callback );
-        this.modalService.componentInjected.instance.message = message;
-        this.setDialogOptions( options );
+        // this.modalService.createModalDialog( TlDialogAlert, this.factoryResolver, callback );
+        // this.modalService.componentInjected.instance.message = message;
+        // this.setDialogOptions( options );
     }
 
     error( message: string, callback?: Function, options?: ErrorOptions ) {
-        this.modalService.createModalDialog( TlDialogError, this.factoryResolver, callback );
-        this.modalService.componentInjected.instance.message = message;
-        this.setDialogOptions( options );
+        // this.modalService.createModalDialog( TlDialogError, this.factoryResolver, callback );
+        // this.modalService.componentInjected.instance.message = message;
+        // this.setDialogOptions( options );
     }
 
-    private setDialogOptions( options ) {
-        if ( !this.existOptions( options ) ) {
-            return;
-        }
-        Object.keys( options ).forEach( ( value ) => {
-            this.modalService.componentInjected.instance[ value ] = options[ value ];
-        } );
-    }
-
-    private existOptions( options ) {
-        if (options === undefined) {
-            return false;
-        }
-        return Object.keys(options).length > 0;
-    }
 }

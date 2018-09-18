@@ -7,6 +7,7 @@ export interface ModalOptions {
     height?: string;
     width?: string;
     closeShortcut?: string;
+    identifier?: string;
     restoreShortcut?: string;
     maximizeShortcut?: string;
     draggable?: boolean;

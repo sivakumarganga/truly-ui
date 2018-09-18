@@ -31,6 +31,7 @@ import { ShowcaseTablePropertiesModule } from '../../shared/components/showcase-
 import { ShowcaseTableEventsModule } from '../../shared/components/showcase-table-events/showcase-table-events.module';
 import { HighlightModule } from 'ngx-highlightjs';
 import { MultiViewModule } from '../../../../projects/truly-ui/src/components/multiview/index';
+import { SmartFormService } from '../../../../projects/truly-ui/src/components/form/modes/smart/smart-form.service';
 
 @NgModule({
   declarations: [

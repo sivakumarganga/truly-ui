@@ -29,6 +29,7 @@ import { ShowcaseTableEventsModule } from '../../../shared/components/showcase-t
 import { DumpDataService } from '../../../shared/services/dumpdata';
 import { MultiViewModule } from '../../../../../projects/truly-ui/src/components/multiview/index';
 import { SmartFormModalComponent } from './smart-modal/smart-modal.component';
+import { SmartFormService } from '../../../../../projects/truly-ui/src/components/form/modes/smart/smart-form.service';
 
 
 @NgModule({
@@ -71,6 +72,8 @@ import { SmartFormModalComponent } from './smart-modal/smart-modal.component';
   ],
   providers: [
     DumpDataService,
+    SmartFormService
+
   ],
   entryComponents: [ SmartFormModalComponent ]
 })

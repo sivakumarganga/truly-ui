@@ -25,12 +25,12 @@ export class DialogDemoComponent {
   }
 
   info() {
-    this.dialogService.info( 'This is an Info Dialog', ( modalResult ) => {
-      console.log('Return', modalResult);
-    }, {
+    this.dialogService.info( 'This is an Info Dialog',  {
       title: 'My custom dialog',
       draggable: true,
-    } );
+    } ).then(( modalResult ) => {
+      console.log('Return', modalResult);
+    });
   }
 
   confirmation() {

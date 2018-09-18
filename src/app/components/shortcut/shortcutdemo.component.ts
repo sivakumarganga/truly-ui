@@ -42,7 +42,7 @@ export class ShortcutDemoComponent {
   }
 
   showDialog(text) {
-    this.dialogService.info( text, ( modalResult ) => {
+    this.dialogService.info( text ).then(( modalResult ) => {
       console.log('Return', modalResult);
     });
   }

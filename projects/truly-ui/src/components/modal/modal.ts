@@ -25,12 +25,12 @@ import {
   Input, NgZone, OnDestroy, OnInit, Output, Renderer2, ViewChild, ViewContainerRef
 } from '@angular/core';
 import { ContainerModalService } from './addons/container-modal/container-modal.service';
-import { ModalService } from './modal.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ModalResult } from '../core/enums/modal-result';
-import { ModalOptions } from './modal-options';
-import { SidebarService } from './sidebar.service';
+import { ModalOptions } from './interfaces/modal-options';
+import { SidebarService } from './services/sidebar.service';
 import { Subscription } from 'rxjs';
+import { ModalManagerService } from './services/modal-manager.service';
 
 let subscribeMouseMove;
 
@@ -63,6 +63,8 @@ export class TlModal implements OnInit, AfterViewInit, ModalOptions, OnDestroy {
   @Input() closable = true;
 
   @Input() icon = '';
+
+  @Input() identifier = '';
 
   @Input() title = 'My Modal';
 
@@ -114,7 +116,7 @@ export class TlModal implements OnInit, AfterViewInit, ModalOptions, OnDestroy {
 
   public index;
 
-  public serviceControl: ModalService;
+  public serviceControl: ModalManagerService;
 
   public maximized = false;
 

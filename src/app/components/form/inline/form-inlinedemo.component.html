@@ -13,7 +13,7 @@
           <app-card>
             <tl-tabcontrol [height]="'250px'">
               <tl-tab [title]="'General'">
-                <tl-form [formGroup]="form" [mode]="'inline'" (submitForm)="onSubmit($event)">
+                <tl-inline-form [formGroup]="form" (submitForm)="onSubmit($event)">
                   <div class="form-group">
                     <tl-input [label]="'Name'" formControlName="name"></tl-input>
                   </div>
@@ -27,10 +27,9 @@
                     <tl-checkbox [color]="'primary'" [label]="'Active'" formControlName="active"></tl-checkbox>
                   </div>
                   <div class="form-group" style="float: right;">
-                    <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!form.valid"
-                               formSubmit></tl-button>
+                    <tl-button [color]="'primary'" submitButton [text]="'Submit Form'" [disabled]="!form.valid"></tl-button>
                   </div>
-                </tl-form>
+                </tl-inline-form>
               </tl-tab>
             </tl-tabcontrol>
             <div class="spacer"></div>
@@ -48,7 +47,7 @@
 <tl-tabcontrol [height]="'250px'">
 
   <tl-tab [title]="'General'">
-    <tl-form [formGroup]="form" [mode]="'inline'" (submitForm)="onSubmit($event)">
+    <tl-inline-form [formGroup]="form" (submitForm)="onSubmit($event)">
       <div class="form-group">
         <tl-input [label]="'Name'" formControlName="name"></tl-input>
       </div>
@@ -62,9 +61,9 @@
         <tl-checkbox [color]="'primary'" [label]="'Active'" formControlName="active"></tl-checkbox>
       </div>
       <div class="form-group">
-        <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!form.valid" formSubmit></tl-button>
+        <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!form.valid" submitButton></tl-button>
       </div>
-    </tl-form>
+    </tl-inline-form>
   </tl-tab>
 
 </tl-tabcontrol>
@@ -139,12 +138,12 @@ public form = new FormGroup({
             <h4>Configure Form in HTML</h4>
             <p>Create a tl-form with formGroup directive with it controls.</p>
             <textarea highlight-js [options]="{'tabReplace': ''}" [lang]="'html'">
-<tl-form [formGroup]="form" [mode]="'inline'" (submitForm)="onSubmit($event)">
-    <tl-input [label]="'Name'" formControlName="name"></tl-input>
-    <tl-input [label]="'LastName'" formControlName="lastName"></tl-input>
-    <tl-input [mask]="'99.99.9999'" [label]="'Birthday'" formControlName="birthday"></tl-input>
-    <tl-checkbox [color]="'primary'" [label]="'Active'" formControlName="active"></tl-checkbox>
-</tl-form>
+<!--<tl-form [formGroup]="form" [mode]="'inline'" (submitForm)="onSubmit($event)">-->
+    <!--<tl-input [label]="'Name'" formControlName="name"></tl-input>-->
+    <!--<tl-input [label]="'LastName'" formControlName="lastName"></tl-input>-->
+    <!--<tl-input [mask]="'99.99.9999'" [label]="'Birthday'" formControlName="birthday"></tl-input>-->
+    <!--<tl-checkbox [color]="'primary'" [label]="'Active'" formControlName="active"></tl-checkbox>-->
+<!--</tl-form>-->
             </textarea>
             <p></p>
           </app-card>
@@ -165,24 +164,24 @@ public form = new FormGroup({
           <app-card>
             <tl-tabcontrol [height]="'250px'">
               <tl-tab [title]="'General'">
-                <tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">
-                  <div class="form-group">
-                    <tl-input [name]="'name'" [label]="'Name'" required [(ngModel)]="user.name"></tl-input>
-                  </div>
-                  <div class="form-group">
-                    <tl-input [name]="'lastName'" [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>
-                  </div>
-                  <div class="form-group">
-                    <tl-input [name]="'birthday'" [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>
-                  </div>
-                  <div class="form-group col-md-offset-1" style="float: left;">
-                    <tl-checkbox [name]="'active'" [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>
-                  </div>
-                  <div class="form-group" style="float: right;">
-                    <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid"
-                               formSubmit></tl-button>
-                  </div>
-                </tl-form>
+                <!--<tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">-->
+                  <!--<div class="form-group">-->
+                    <!--<tl-input [name]="'name'" [label]="'Name'" required [(ngModel)]="user.name"></tl-input>-->
+                  <!--</div>-->
+                  <!--<div class="form-group">-->
+                    <!--<tl-input [name]="'lastName'" [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>-->
+                  <!--</div>-->
+                  <!--<div class="form-group">-->
+                    <!--<tl-input [name]="'birthday'" [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>-->
+                  <!--</div>-->
+                  <!--<div class="form-group col-md-offset-1" style="float: left;">-->
+                    <!--<tl-checkbox [name]="'active'" [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>-->
+                  <!--</div>-->
+                  <!--<div class="form-group" style="float: right;">-->
+                    <!--<tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid"-->
+                               <!--formSubmit></tl-button>-->
+                  <!--</div>-->
+                <!--</tl-form>-->
               </tl-tab>
             </tl-tabcontrol>
             <div class="spacer"></div>
@@ -201,13 +200,13 @@ public form = new FormGroup({
 <tl-tabcontrol [height]="'250px'">
 
   <tl-tab [title]="'General'">
-    <tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">
-        <tl-input [name]="'name'" [label]="'Name'" required [(ngModel)]="user.name"></tl-input>
-        <tl-input [name]="'lastName'" [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>
-        <tl-input [name]="'birthday'" [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>
-        <tl-checkbox [name]="'active'" [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>
-        <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid" formSubmit></tl-button>
-    </tl-form>
+    <!--<tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">-->
+        <!--<tl-input [name]="'name'" [label]="'Name'" required [(ngModel)]="user.name"></tl-input>-->
+        <!--<tl-input [name]="'lastName'" [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>-->
+        <!--<tl-input [name]="'birthday'" [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>-->
+        <!--<tl-checkbox [name]="'active'" [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>-->
+        <!--<tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid" formSubmit></tl-button>-->
+    <!--</tl-form>-->
   </tl-tab>
 
 </tl-tabcontrol>
@@ -268,13 +267,13 @@ export class FormInlinedemoComponent {
             <h4>Configure Form in HTML</h4>
             <p>Create a tl-form with tl-input with <code>[(ngModel)]</code> directive.</p>
             <textarea highlight-js [options]="{'tabReplace': ''}" [lang]="'html'">
-<tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">
-    <tl-input [label]="'Name'" [(ngModel)]="user.name"></tl-input>
-    <tl-input [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>
-    <tl-input [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>
-    <tl-checkbox [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>
-    <tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid" formSubmit></tl-button>
-</tl-form>
+<!--<tl-form #formDriven [mode]="'inline'" (submitForm)="onSubmit($event)">-->
+    <!--<tl-input [label]="'Name'" [(ngModel)]="user.name"></tl-input>-->
+    <!--<tl-input [label]="'LastName'" [(ngModel)]="user.lastName"></tl-input>-->
+    <!--<tl-input [mask]="'99.99.9999'" [label]="'Birthday'" [(ngModel)]="user.birthday"></tl-input>-->
+    <!--<tl-checkbox [color]="'primary'" [label]="'Active'" [(ngModel)]="user.active"></tl-checkbox>-->
+    <!--<tl-button [color]="'primary'" [text]="'Submit Form'" [disabled]="!formDriven.valid" formSubmit></tl-button>-->
+<!--</tl-form>-->
             </textarea>
             <blockquote>Once are using TL-FORM with Template Driven, the TL-FORM component will create a form internally
               and will add the controls that's inside of it.
@@ -310,9 +309,9 @@ export class FormInlinedemoComponent {
             <h4>Get the Form Value</h4>
             <p>Get the form value using the <code>submitForm</code> event registering in tl-form tag.</p>
             <textarea highlight-js [options]="{'tabReplace': ''}" [lang]="'html'">
-<tl-form [mode]="'inline'" (submitForm)="onSubmit($event)">
-  <!--Fields...-->
-</tl-form>
+<!--<tl-form [mode]="'inline'" (submitForm)="onSubmit($event)">-->
+  <!--&lt;!&ndash;Fields...&ndash;&gt;-->
+<!--</tl-form>-->
 </textarea>
           </app-card>
           <app-card>

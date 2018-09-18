@@ -1,0 +1,23 @@
+.formContent {
+  position: relative;
+}
+
+.forFooter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.clearfix {
+  height: 55px;
+}
+
+.controls {
+  text-align: left;
+  float: right;
+  padding: 10px;
+}
+
